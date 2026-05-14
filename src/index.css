@@ -1,0 +1,182 @@
+:root {
+  --bg: #06060f;
+  --bg2: #0d0d1a;
+  --bg3: #12121f;
+  --surface: #16162a;
+  --surface2: #1c1c35;
+  --border: rgba(130, 120, 255, 0.12);
+  --border2: rgba(130, 120, 255, 0.22);
+  --primary: #7c6bff;
+  --primary2: #a855f7;
+  --accent: #00e5ff;
+  --accent2: #fb7185;
+  --green: #34d399;
+  --yellow: #fbbf24;
+  --red: #f87171;
+  --text: #e8e6ff;
+  --text2: #a8a0d0;
+  --text3: #5a547a;
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --radius-lg: 22px;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  --shadow-glow: 0 0 40px rgba(124, 107, 255, 0.18);
+  --transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 999px; }
+
+/* Selection */
+::selection { background: rgba(124, 107, 255, 0.35); color: white; }
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.animate-fade-up { animation: fadeUp 0.5s ease forwards; }
+.animate-fade-in { animation: fadeIn 0.4s ease forwards; }
+
+/* Grid background */
+.grid-bg {
+  background-image: 
+    linear-gradient(rgba(124, 107, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 107, 255, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Glass card */
+.glass {
+  background: rgba(22, 22, 42, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+/* Glow effects */
+.glow-purple { box-shadow: 0 0 30px rgba(124, 107, 255, 0.25); }
+.glow-cyan { box-shadow: 0 0 30px rgba(0, 229, 255, 0.2); }
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #7c6bff 0%, #a855f7 50%, #00e5ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Loading spinner */
+.spinner {
+  width: 22px; height: 22px;
+  border: 2px solid rgba(124,107,255,0.2);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+/* Noise overlay */
+.noise::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+/* Form elements */
+input, textarea, select {
+  font-family: var(--font-body);
+  font-size: 14px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  outline: none;
+  width: 100%;
+  transition: var(--transition);
+}
+input:focus, textarea:focus, select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(124, 107, 255, 0.12);
+}
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button { opacity: 1; }
+
+label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text2);
+  display: block;
+  margin-bottom: 6px;
+}
+
+select option { background: var(--surface2); }
+
+/* Button base */
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: var(--transition);
+}
+
+/* Recharts overrides */
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: var(--surface2) !important;
+  border: 1px solid var(--border2) !important;
+  border-radius: var(--radius-sm) !important;
+  color: var(--text) !important;
+}
+.recharts-text { fill: var(--text2) !important; }
+.recharts-cartesian-axis-tick-value { fill: var(--text3) !important; font-size: 11px; }
+.recharts-legend-item-text { color: var(--text2) !important; font-size: 12px; }
+
+/* Scrollbar in containers */
+.custom-scroll::-webkit-scrollbar { width: 4px; }
+.custom-scroll::-webkit-scrollbar-thumb { background: var(--border2); }
