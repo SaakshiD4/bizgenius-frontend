@@ -141,7 +141,8 @@
 //     return res.blob()
 //   })
 
-const BASE = '/api'
+// const BASE = '/api'
+const BASE = 'https://bizgenius-backend.onrender.com'
 
 async function request(endpoint, options = {}) {
   const res = await fetch(`${BASE}${endpoint}`, {
